@@ -1,4 +1,4 @@
-# # VSS RAS-UFCG
+## VSS RAS-UFCG
 
 Time de futebol de robôs na categoria Very Small Soccer Size desenvolvido pelos menbros e voluntários da RAS UFCG
 
