@@ -1,8 +1,9 @@
-## VSS Simulator
-- Simulador para Very Small Soccer Sizer Soccer League [by Rodetas](https://vss-sdk.github.io/book/general.html)
-- API para controle dos robôs. [by RobôCIn](www.cin.ufpe.br/~robocin)
+# VSS Simulator
+- Simulador para Very Small Soccer Sizer Soccer League. Por: [Rodetas](https://vss-sdk.github.io/book/general.html)
+- API para controle dos robôs. Por: [RobôCIn](www.cin.ufpe.br/~robocin)
+- Motion Planning. Por: [RAS-UFCG](https://github.com/ras-ufcg)
 
-# Instalação
+## Instalação
 
 O simulador é divido em vários softwares. Para instalar, é necessário estar em um computador **Ubuntu** e executar os seguintes comandos em ordem a partir da pasta base desse projeto (VSS-Projeto).
 
@@ -21,7 +22,7 @@ cd VSS-Viewer
 sudo ./configure.sh
 ~~~~
 
-# Executando o simulador
+## Executando o simulador
 
 Para utilizar o simulador, você deve executar os softwares instalados em ordem. Para cada software, a execução se dá chamando o binário presente na pasta build. Um exemplo para execução do projeto pode ser conferida abaixo.
 
@@ -102,5 +103,7 @@ sudo ./configure.sh
 ~~~
 
 Antes de executar o código novamente, é necessário reiniciar o VSS Simulator, ou o código poderá apresentar comportamentos estranhos.
+##  Agradecimentos
 
-Contato: José Nilton <jnolj@cin.ufpe.br> e RobôCIn <robocin@cin.ufpe.br>
+- [Rodetas](https://vss-sdk.github.io/book/general.html)
+- [RobôCIn](www.cin.ufpe.br/~robocin)
