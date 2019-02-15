@@ -49,40 +49,82 @@ class GenericPlayer1 {
         {
             float xpos = state.ball.x;
             float ypos = state.ball.y;
+            float limitSup = 8;
+            float limitInf = 118;
+
             vss::Robot robot = state.teamYellow[index];
 
+            bool posAtkX = false;
+            //bool posAtkY = false;
+
             // Se a bola estiver no campo de ataque, posiciona-se 10 passos atras da bola
-            if (state.ball.x <= 80) xpos = state.ball.x + 10;
+            if (state.ball.x <= 100) xpos = state.ball.x + 5;
 
             // Se a bola estiver no campo de defesa, espera voltar para o ataque
-            if (state.ball. x > 80) xpos = 80;
+            if (state.ball. x > 100) xpos = 110;
 
             // Se a bola estiver na metade de baixo do campo, posiciona-se 10 passos acima da bola
-            if ((state.ball.y >= 62.5) && (state.ball.y > 10)) ypos = state.ball.y + 10;
+            if ((state.ball.y >= 62.5) && (state.ball.y > 10)) ypos = state.ball.y + 5;
 
             // Se a bola estiver na metade de cima do campo, posiciona-se 10 passos abaixo da bola
-            if ((state.ball.y < 62.5) && (state.ball.y < 115)) ypos = state.ball.y - 10;
+            if ((state.ball.y < 62.5) && (state.ball.y < 115)) ypos = state.ball.y - 5;
+
+             // Aplica limites em Y
+            if (ypos <= limitSup) ypos = limitSup;
+            if (ypos >= limitInf) ypos = limitInf;
 
             // Se o robô estiver em posição de ataque, levar a bola para o gol
-            if (robot.x <= state.ball.x + 15)
-            {
-                printf("em x, ok!\n");
-                if (((state.ball.y >= 62.5) && (robot.y < (state.ball.y + 10))) || ((state.ball.y < 62.5) && (robot.y > (state.ball.y - 10))))
-                {
-                    printf("Em posição de ataque \n");
-                    xpos = state.ball.x - 10;
-                    ypos = 62.5;
-                }
+            if ((robot.x < (state.ball.x + 10)) && (robot.x > (state.ball.x + 5))) posAtkX = true;
+            else posAtkX = false;
+            //if ((state.ball.y >= 62.5) && (robot.y > 10)) posAtkY = true;
+            //if ((state.ball.y < 62.5) && (state.ball.y < 115)) posAtkY = true;
 
-            }
+            if (posAtkX) printf("Ok em X\n");
+            else printf("Esperando OK em X\n");
+            //if (posAtkY) printf("Ok em Y\n");
+
 
             return Utils::Posture(xpos, ypos, M_PI/4);
         }
 
         Utils::Posture blueObjective(vss::State state, int index)
         {
-            float xpos = (this->_teamType == vss::TeamType::Blue) ? state.ball.x - 18 : state.ball.x + 31;
-            float ypos = state.ball.y + 5;
+            float xpos = state.ball.x;
+            float ypos = state.ball.y;
+            float limitSup = 8;
+            float limitInf = 118;
+
+            vss::Robot robot = state.teamYellow[index];
+
+            bool posAtkX = false;
+            //bool posAtkY = false;
+
+            // Se a bola estiver no campo de ataque, posiciona-se 10 passos atras da bola
+            if (state.ball.x >= 55) xpos = state.ball.x - 5;
+
+            // Se a bola estiver no campo de defesa, espera voltar para o ataque
+            if (state.ball. x < 50) xpos = 55;
+
+            // Se a bola estiver na metade de baixo do campo, posiciona-se 10 passos acima da bola
+            if ((state.ball.y >= 62.5) && (state.ball.y > 10)) ypos = state.ball.y + 5;
+
+            // Se a bola estiver na metade de cima do campo, posiciona-se 10 passos abaixo da bola
+            if ((state.ball.y < 62.5) && (state.ball.y < 115)) ypos = state.ball.y - 5;
+
+            // Aplica limites em Y
+            if (ypos <= limitSup) ypos = limitSup;
+            if (ypos >= limitInf) ypos = limitInf;
+
+
+            // Se o robô estiver em posição de ataque, levar a bola para o gol
+            if ((robot.x < (state.ball.x + 10)) && (robot.x > (state.ball.x + 5))) posAtkX = true;
+            else posAtkX = false;
+            //if ((state.ball.y >= 62.5) && (robot.y > 10)) posAtkY = true;
+            //if ((state.ball.y < 62.5) && (state.ball.y < 115)) posAtkY = true;
+
+            if (posAtkX) printf("Ok em X\n");
+            else printf("Esperando OK em X\n");
+            //if (posAtkY) printf("Ok em Y\n");
 
             return Utils::Posture(xpos, ypos, M_PI/4.);
         }

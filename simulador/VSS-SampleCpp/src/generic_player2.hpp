@@ -58,10 +58,10 @@ class GenericPlayer2 {
 
         Utils::Posture blueObjective(vss::State state, int index)
         {
-            float xpos = (this->_teamType == vss::TeamType::Blue) ? state.ball.x - 18 : state.ball.x + 31;
-            float ypos = state.ball.y + 5;
+            float xpos = 45;
+            float ypos = state.ball.y;
 
-            return Utils::Posture(xpos, ypos, M_PI/4.);
+            return Utils::Posture(xpos, ypos, M_PI/4);
         }
 
         /**
