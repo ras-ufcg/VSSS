@@ -41,11 +41,14 @@ class GenericPlayer {
          */
         Utils::Posture defineObjective(vss::State state, int index)
         {
-
+            // Define os limites em Y da área
             float limiteSup = 93;
             float limiteInf = 35;
+            // Define a linha em X que o Robô ficara
             float xpos = (this->_teamType == vss::TeamType::Blue) ? 20.0 : 150;
+            // Faz o robô seguir a bola sempre em Y dentro dos limites da área
             float ypos = (state.ball.y > limiteSup) ? limiteSup : (state.ball.y < limiteInf) ? limiteInf : state.ball.y;
+
             return Utils::Posture(xpos, ypos, M_PI/4.);
         }
 

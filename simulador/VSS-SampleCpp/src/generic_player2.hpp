@@ -29,7 +29,8 @@ class GenericPlayer2 {
          * @param index Indice do robo que se deseja atualizar
          * @return vss::WheelsCommand Comandos para as rodas do robo que se deseja atualizar
          */
-        vss::WheelsCommand update(vss::State state, int index) {
+        vss::WheelsCommand update(vss::State state, int index)
+        {
             Utils::Posture objective = defineObjective(state, index);
             return motionControl(state, objective, index);
         }
@@ -38,12 +39,28 @@ class GenericPlayer2 {
          * @brief Define a postura final que se deseja chegar na iteração atual
          *
          * @param index Indice do robo que se deseja atualizar
+         * @param state Estado atual do jogador
          * @return Posture Posiçãoque se deseja adquirir
          */
         Utils::Posture defineObjective(vss::State state, int index)
         {
+            return (this->_teamType == vss::TeamType::Blue)? blueObjective(state, index) : yellowObjective(state, index);
+        }
+
+
+        Utils::Posture yellowObjective(vss::State state, int index)
+        {
+            float xpos = 120;
+            float ypos = state.ball.y;
+
+            return Utils::Posture(xpos, ypos, M_PI/4);
+        }
+
+        Utils::Posture blueObjective(vss::State state, int index)
+        {
             float xpos = (this->_teamType == vss::TeamType::Blue) ? state.ball.x - 18 : state.ball.x + 31;
             float ypos = state.ball.y + 5;
+
             return Utils::Posture(xpos, ypos, M_PI/4.);
         }
 
