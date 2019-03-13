@@ -41,15 +41,112 @@ class GenericPlayer {
          */
         Utils::Posture defineObjective(vss::State state, int index)
         {
-            // Define os limites em Y da área
-            float limiteSup = 93;
-            float limiteInf = 35;
-            // Define a linha em X que o Robô ficara
-            float xpos = (this->_teamType == vss::TeamType::Blue) ? 20.0 : 150;
-            // Faz o robô seguir a bola sempre em Y dentro dos limites da área
-            float ypos = (state.ball.y > limiteSup) ? limiteSup : (state.ball.y < limiteInf) ? limiteInf : state.ball.y;
+            // Variáveis
+            /*
+             * xb,yb - coordenadas da bola
+             * vxb, vyb - representação de um vetor unitário no sentido de variação de movimento da bola
+             * xg, yg - coordenadas do goleiro
+             * d1 e d2 limites estratégicos, 40 3 70 cm respec.
+             * ymax, ymin - limites dá área do goleiro 
+             */
 
-            return Utils::Posture(xpos, ypos, M_PI/4.);
+            vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[index] : state.teamYellow[index];
+            
+            // Obtenção de valores para as variáveis
+            
+            // Obtem as coordenadas da bola
+            float xb = state.ball.x;
+            float yb = state.ball.y;
+
+            // Obtem o vetor variação de acordo com os últimos dois estados recebidos
+            float vxb = calcula_variacao_x();
+            float vyb = calcula_variacao_y();
+
+            // Obtem as coordenadas do goleiro;
+            float xg = robot.x;
+            float yg = robot.y;
+
+            // Definição de constantes
+            
+            // a constante d1, marca uma linha em y à 40 cm do gol do nosso time
+            // nas coordenadas do campo da simulação, esse valor equivale á 50.77
+            float d1 = 50.77;
+
+            // a constante d2 também demarca uma linha só que numa distância de 
+            // 70 cm do nosso gol. o que na simulação equivale à 88.53
+            float d2 = 88.53;
+
+            // Máquina de estados
+
+            volatile char estado = 'a';
+            
+            // Regras de transição
+
+            if(estado == 'a')
+            {   
+                // Regra 1
+                estado = ((xb > d1) && (vxb < 0))? 'b' : 'a';
+                // Regra 2
+                estado = ((xb < d2) && (vxb >= 0))? 'c' : 'a';
+            }
+
+            if(estado == 'b')
+            {   
+                // Regra 2
+                estado = ((xb < d2) && (vxb >= 0))? 'c' : 'b';
+            }
+
+            if(estado == 'c')
+            {   
+                // Regra 1
+                estado = ((xb > d1) && (vxb < 0))? 'b' : 'c';
+                // Regra 3
+                estado = (xb >= d2)? 'a' : 'c';
+            }
+
+
+            switch (estado)
+            {
+                case 'a':
+                    return Utils::Posture(0, 0, M_PI/4);
+                    break;
+                
+                case 'b':
+                    return Utils::Posture(30, 30, M_PI/4);
+                    break;
+                
+                case 'c':
+                    return Utils::Posture(80, 80, M_PI/4);
+                    break;
+            
+                default:
+                    break;
+            }
+
+
+
+        }
+        /**
+         * @brief Calcula valores unitários representando a direção de deslocamento da bola em x. 
+         * 
+         * 
+         * @return int 
+         */
+        int calcula_variacao_x()
+        {
+            
+            return 0
+        }
+
+        /**
+         * @brief Calcula valores unitários representando a direção de deslocamento da bola em y. 
+         * 
+         * 
+         * @return int 
+         */
+        int calcula_variacao_y()
+        {
+            return 0
         }
 
         /**
