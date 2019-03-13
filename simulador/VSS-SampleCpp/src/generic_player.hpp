@@ -50,7 +50,7 @@ class GenericPlayer {
              * ymax, ymin - limites dá área do goleiro 
              */
 
-            vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[index] : state.teamYellow[index];
+            //vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[index] : state.teamYellow[index];
             
             // Obtenção de valores para as variáveis
             
@@ -60,11 +60,11 @@ class GenericPlayer {
 
             // Obtem o vetor variação de acordo com os últimos dois estados recebidos
             float vxb = calcula_variacao_x();
-            float vyb = calcula_variacao_y();
+            //float vyb = calcula_variacao_y();
 
             // Obtem as coordenadas do goleiro;
-            float xg = robot.x;
-            float yg = robot.y;
+            //float xg = robot.x;
+            //float yg = robot.y;
 
             // Definição de constantes
             
@@ -108,7 +108,8 @@ class GenericPlayer {
             switch (estado)
             {
                 case 'a':
-                    return Utils::Posture(0, 0, M_PI/4);
+                    // Goleiro no centro do gol
+                    return Utils::Posture(19.00, 65.30, M_PI/4);
                     break;
                 
                 case 'b':
@@ -116,10 +117,11 @@ class GenericPlayer {
                     break;
                 
                 case 'c':
-                    return Utils::Posture(85, 85, M_PI/4);
+                    return Utils::Posture(19.00, yb, M_PI/4);
                     break;
             
                 default:
+                    return Utils::Posture(105, 105, M_PI/4);
                     break;
             }
 
@@ -134,8 +136,7 @@ class GenericPlayer {
          */
         int calcula_variacao_x()
         {
-            
-            return 0
+            return 0;
         }
 
         /**
@@ -146,7 +147,7 @@ class GenericPlayer {
          */
         int calcula_variacao_y()
         {
-            return 0
+            return 0;
         }
 
         /**

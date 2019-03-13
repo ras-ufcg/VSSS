@@ -83,8 +83,11 @@ class GenericPlayer1 {
             else printf("Esperando OK em X\n");
             //if (posAtkY) printf("Ok em Y\n");
 
-
+            // --- linha de treino de goleiro --- //
+            xpos = 122;
+            ypos = 150;
             return Utils::Posture(xpos, ypos, M_PI/4);
+            
         }
 
         Utils::Posture blueObjective(vss::State state, int index)
@@ -125,6 +128,10 @@ class GenericPlayer1 {
             if (posAtkX) printf("Ok em X\n");
             else printf("Esperando OK em X\n");
             //if (posAtkY) printf("Ok em Y\n");
+
+            // --- linha de treino de goleiro --- //
+            xpos = 122;
+            ypos = 5;
 
             return Utils::Posture(xpos, ypos, M_PI/4.);
         }

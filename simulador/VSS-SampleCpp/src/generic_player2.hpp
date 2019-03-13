@@ -52,6 +52,11 @@ class GenericPlayer2 {
         {
             float xpos = 120;
             float ypos = state.ball.y;
+            
+
+            // --- linha de treino de goleiro --- //
+            xpos = 40;
+            ypos = 150;
 
             return Utils::Posture(xpos, ypos, M_PI/4);
         }
@@ -60,6 +65,10 @@ class GenericPlayer2 {
         {
             float xpos = 45;
             float ypos = state.ball.y;
+
+            // --- linha de treino de goleiro --- //
+            xpos = 40;
+            ypos = 5;
 
             return Utils::Posture(xpos, ypos, M_PI/4);
         }
