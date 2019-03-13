@@ -116,7 +116,7 @@ class GenericPlayer {
                     break;
                 
                 case 'c':
-                    return Utils::Posture(80, 80, M_PI/4);
+                    return Utils::Posture(85, 85, M_PI/4);
                     break;
             
                 default:
