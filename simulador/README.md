@@ -65,7 +65,7 @@ Dessa forma, seu terminal deve informar que você está conectado. Agora, para i
 
 Obs.: Seguir os passos acima é importante quando se deseja realizar passos iindividuais como, somente compilar o as últimas alterações no código dos jogadores ou quando deseja acionar apenas um dos times sem compilar o código previamente, por exemplo. Mas se desejar apenas executar a simulação de forma completa comilando as novas alterações basta fazer: 
 ~~~~
-`sudo ./iniciar.sh`
+sudo ./iniciar.sh
 ~~~~
 ### Controles do simulador
 
