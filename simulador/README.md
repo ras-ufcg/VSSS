@@ -63,7 +63,7 @@ Caso essa tag não seja passada para o programa, o código irá atribuir o time 
 
 Dessa forma, seu terminal deve informar que você está conectado. Agora, para iniciar o jogo, você deve ir na tela do simulador como à acima e apertar **espaço** para iniciar o jogo. 
 
-Obs.: Seguir os passos acima é importante quando se deseja realizar passos iindividuais como, somente compilar o as últimas alterações no código dos jogadores ou quando deseja acionar apenas um dos times sem compilar o código previamente, por exemplo. Mas se desejar apenas executar a simulação de forma completa comilando as novas alterações basta fazer: 
+**Obs**.: Seguir os passos acima é importante quando se deseja realizar passos iindividuais como, somente compilar o as últimas alterações no código dos jogadores ou quando deseja acionar apenas um dos times sem compilar o código previamente, por exemplo. Mas se desejar apenas executar a simulação de forma completa comilando as novas alterações basta fazer: 
 ~~~~
 sudo ./iniciar.sh
 ~~~~
