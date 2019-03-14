@@ -84,8 +84,12 @@ class GenericPlayer1 {
             //if (posAtkY) printf("Ok em Y\n");
 
             // --- linha de treino de goleiro --- //
-            xpos = 122;
-            ypos = 150;
+            //xpos = 122;
+            //ypos = 150;
+
+            // --- ataque em linha reta --- // 
+            xpos = state.ball.x;
+            ypos = state.ball.y;
             return Utils::Posture(xpos, ypos, M_PI/4);
             
         }
