@@ -50,7 +50,8 @@ class GenericPlayer {
              * ymax, ymin - limites dá área do goleiro 
              */
 
-            vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[index] : state.teamYellow[index];
+            vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? 
+                                state.teamBlue[index] : state.teamYellow[index];
             
             // Obtenção de valores para as variáveis
             
@@ -156,7 +157,8 @@ class GenericPlayer {
             //
             volatile float _ball_pos = 0;
             
-            return (( ball_pos - _ball_pos) > 0)? 1 : (( ball_pos - _ball_pos) == 0)? 0 : -1;
+            return (( ball_pos - _ball_pos) > 0)? 
+                    1 : (( ball_pos - _ball_pos) == 0)? 0 : -1;
         }
 
         /**
