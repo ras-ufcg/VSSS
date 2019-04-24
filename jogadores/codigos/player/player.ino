@@ -43,7 +43,7 @@ void setup()
   radio.setPALevel(RF24_PA_MIN);
   radio.startListening();
 
-  Serial.begin(9600);
+  Serial.begin(115200);
  
 }
 
@@ -51,7 +51,7 @@ void loop()
 {
   char rec;
 
-  Serial.print("rec: ");
+  Serial.println("rec: ");
   if (radio.available()) {
     radio.read(&rec, sizeof(rec));
     Serial.println(rec);
@@ -70,14 +70,21 @@ void setWheels(char rec)
   switch (rec) {
   case 'r':
     d1 = true;
-    e1, e2, d2 = false;
+    e1 = false;
+    e2 = false;
+    d2 = false;
     break;
   case 'e':
     e1 = true;
-    d1, d2, e2 = false;
+    d1 = false;
+    d2 = false;
+    e2 = false;
     break;
   default:
-    d1, d2, e1, e2 = true;
+    d1 = false;
+    d2 = false;
+    e1 = false;
+    e2 = true;
     break;
 }
 }
