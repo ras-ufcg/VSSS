@@ -11,12 +11,11 @@
         - Faz a leitura de dois push butons ligados nas portas
         D2 e D4.
         - Caso nenhum dos botões esteja acionado, o controller deve
-        mandar o comando para o robô segir em linha reta.
+        mandar o comando para o robô permanecer parado.
         - Caso D2 esteja acionado, o controller deve eviar o comando
         para que o robô faça uma curva para a esquerda.
         - Caso D4 esteja acionado, o controller deve eviar o comando
         para que o robô faça uma curva para a direita.
-
 
     Colaboradores:
         Lyang Leme de Medeiros
@@ -49,11 +48,11 @@ void loop()
 {
     checkbuttons();
 
-    if(!esq && !dir) Serial.println('r'); // Comando para o robô seguir reto
-    if(esq) Serial.println('e'); // Comando para o robô fazer curva à esquerda
-    if(dir) Serial.println('d'); // Advinha!
+    if(esq && dir) Serial.println('p'); // Comando para o robô ficar parado
+    if(!esq) Serial.println('e'); // Comando para o robô fazer curva à esquerda
+    if(!dir) Serial.println('d'); // Advinha!
 
-    delay(20);
+    delay(200);
 }
 
 void checkbuttons()
