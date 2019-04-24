@@ -38,7 +38,12 @@ bool esq, dir = false;
 void setup()
 {
     pinMode(ESQ, INPUT_PULLUP);
-    pinMode(DIR, INPUT_PULLUP);
+    pinMode(DIR, INPUT_PULLUP);    
+
+    radio.begin();
+    radio.openWritingPipe(address);
+    radio.setPALevel(RF24_PA_MIN);
+    radio.stopListening();
 
     Serial.begin(115200);
 
@@ -48,11 +53,16 @@ void loop()
 {
     checkbuttons();
 
-    if(esq && dir) Serial.println('p'); // Comando para o robô ficar parado
-    if(!esq) Serial.println('e'); // Comando para o robô fazer curva à esquerda
-    if(!dir) Serial.println('d'); // Advinha!
+    char env;
 
-    delay(200);
+    if(esq && dir) env = 'p'; // Comando para o robô ficar parado
+    if(!esq) env = 'e'; // Comando para o robô fazer curva à esquerda
+    if(!dir) env = 'd'; // Advinha!
+
+    Serial.println(env);
+    radio.write(&env, sizeof(env));
+    delay(300);
+    
 }
 
 void checkbuttons()
