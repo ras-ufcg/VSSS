@@ -44,18 +44,17 @@ void setup()
   radio.startListening();
 
   Serial.begin(115200);
+
+  Serial.println("I'm who plays B-]");
  
 }
 
 void loop() 
 {
-  char rec;
-
-  Serial.println("rec: ");
   if (radio.available()) {
-    radio.read(&rec, sizeof(rec));
-    Serial.println(rec);
-    setWheels(rec);
+    char text = "";
+    radio.read(&text, sizeof(text));
+    Serial.println(text);
   }
 
   digitalWrite(ESQ1, e1);
@@ -68,22 +67,32 @@ void loop()
 void setWheels(char rec)
 {
   switch (rec) {
-  case 'r':
+  case 'p':
+    Serial.println("Robô parado");
     d1 = true;
     e1 = false;
     e2 = false;
     d2 = false;
     break;
+  case 'd':
+    Serial.println("Robô virando à direita");
+    d1 = true;
+    e1 = true;
+    e2 = false;
+    d2 = false;
+    break;
   case 'e':
+    Serial.println("Robô virando à esquerda");
     e1 = true;
     d1 = false;
     d2 = false;
     e2 = false;
     break;
   default:
-    d1 = false;
-    d2 = false;
-    e1 = false;
+    Serial.println("Robô parado");
+    d1 = true;
+    d2 = true;
+    e1 = true;
     e2 = true;
     break;
 }
