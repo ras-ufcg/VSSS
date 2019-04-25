@@ -54,7 +54,8 @@ void loop()
   if (radio.available()) {
     char text = "";
     radio.read(&text, sizeof(text));
-    Serial.println(text);
+    setWheels(text);
+    //Serial.println(text);
   }
 
   digitalWrite(ESQ1, e1);
