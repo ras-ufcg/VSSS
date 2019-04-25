@@ -16,28 +16,28 @@
 */
 
 #include <SPI.h>
-#include <nRF24L01.h>
+#include "nRF24L01.h"
 #include <RF24.h>
-
+/*
 #define ESQ1 2  // D2 do nano ligado ao Pino 2 da ponte H
 #define ESQ2 3  // D3 do nano ligado ao P 7 da ponte
 #define DIR1 4  // D4 do nano ligado ao P 10 da ponte
 #define DIR2 5  // D5 do nano ligado ao P 15
-
+*/
 bool e1, e2, d1, d2;
 
-RF24 radio(7, 8); // CE, CSN
+RF24 radio(2, 15);; // CE, CSN
 
 const byte address[6] = "00001";
 
 void setup() 
 {
-
+/*
   pinMode(ESQ1, OUTPUT);
   pinMode(ESQ2, OUTPUT);
   pinMode(DIR1, OUTPUT);
   pinMode(DIR2, OUTPUT);
-
+*/
   radio.begin();
   radio.openReadingPipe(0, address);
   radio.setPALevel(RF24_PA_MIN);
@@ -52,22 +52,21 @@ void setup()
 void loop() 
 {
   if (radio.available()) {
-    char text = "";
+    char text[1];
     radio.read(&text, sizeof(text));
     setWheels(text);
-    //Serial.println(text);
   }
-
+/*
   digitalWrite(ESQ1, e1);
   digitalWrite(ESQ2, e2);
   digitalWrite(DIR1, d1);
   digitalWrite(DIR2, d2);
-    
+    */
 }
 
-void setWheels(char rec)
+void setWheels(char *rec)
 {
-  switch (rec) {
+  switch (*rec) {
   case 'p':
     Serial.println("Robô parado");
     d1 = true;
@@ -90,7 +89,8 @@ void setWheels(char rec)
     e2 = false;
     break;
   default:
-    Serial.println("Robô parado");
+    Serial.println("Recebendo Lixo");
+    Serial.println(rec);
     d1 = true;
     d2 = true;
     e1 = true;
