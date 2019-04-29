@@ -58,9 +58,21 @@ class GenericPlayer {
             float xb = state.ball.x;
             float yb = state.ball.y;
 
+            // Vairáveis auxiliares para guardar posições antigas da bola
+            volatile float old_xb = 0;
+            volatile float old_yb = 0;
+
             // Obtem o vetor variação de acordo com os últimos dois estados recebidos
-            float vxb = calcula_variacao_x(xb);
-            float vyb = calcula_variacao_y(yb);
+            float vxb = calcula_variacao_x(xb, old_xb);
+            float vyb = calcula_variacao_y(yb, old_yb);
+
+            // Atualização dos valores antigos  o_0
+            old_xb = xb;
+            old_yb = yb;
+            
+            // DEBUGG LINES
+            printf("Variacao em X: %f \n", vxb);
+            printf("Variacao em Y: %f \n", vyb);
 
             // Obtem as coordenadas do goleiro;
             float xg = robot.x;
@@ -151,10 +163,13 @@ class GenericPlayer {
          * 
          * @return int 
          */
-        int calcula_variacao_x(float ball_pos)
+        int calcula_variacao_x(float ball_pos, float _ball_pos)
         {
             //
-            volatile float _ball_pos = 0;
+            // volatile float _ball_pos = 0;
+            // DEBUGG LINES
+            printf("Posição atual da bola: %f \n", ball_pos);
+            printf("Posição antiga da bola %f \n", _ball_pos);
             
             return (( ball_pos - _ball_pos) > 0)? 1 : (( ball_pos - _ball_pos) == 0)? 0 : -1;
         }
@@ -165,10 +180,10 @@ class GenericPlayer {
          * 
          * @return int 
          */
-        int calcula_variacao_y(float ball_pos)
+        int calcula_variacao_y(float ball_pos, float _ball_pos)
         {
             //
-            volatile float _ball_pos = 0;
+            // volatile float _ball_pos = 0;
 
             return (( ball_pos - _ball_pos) > 0)? 1 : (( ball_pos - _ball_pos) == 0)? 0 : -1;
         }
