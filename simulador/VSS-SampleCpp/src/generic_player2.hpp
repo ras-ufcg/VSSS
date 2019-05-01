@@ -248,7 +248,21 @@ class GenericPlayer2 {
 
         /**
          * @brief Calcula valores unitários representando a direção de deslocamento da bola em x.
-         *
+         *olinha.xb = state.ball.x;
+            bolinha.yb = state.ball.y;
+
+            // Obtem o vetor variação de acordo com os últimos dois estados recebidos
+            float vxb = calcula_variacao_x(bolinha.xb, bolinha.old_xb);
+            float vyb = calcula_variacao_y(bolinha.yb, bolinha.old_yb);
+            // Atualização dos valores antigos  o_0
+
+            bolinha.old_xb = bolinha.xb;
+bolinha.old_yb = bolinha.yb;
+
+            // Atualização dos valores antigos  o_0
+            old_xb = xb;
+            old_yb = yb;
+
          *
          * @return int
          */
