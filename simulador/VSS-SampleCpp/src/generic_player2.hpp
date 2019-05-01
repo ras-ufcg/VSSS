@@ -44,24 +44,30 @@ class GenericPlayer2 {
          */
         Utils::Posture defineObjective(vss::State state, int index)
         {
-            return (this->_teamType == vss::TeamType::Blue)? blueObjective(state, index) : yellowObjective(state, index);
+
+            vss::Robot goleiro = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[0] : state.teamYellow[0];
+
+            vss::Robot outro = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[1] : state.teamYellow[1];
+
+            return (this->_teamType == vss::TeamType::Blue)? blueObjective(state, index, goleiro, outro) : yellowObjective(state, index, goleiro, outro);
+
         }
 
 
-        Utils::Posture yellowObjective(vss::State state, int index)
+        Utils::Posture yellowObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
         {
-            float xpos = 120;
-            float ypos = state.ball.y;
-            
+            //float xpos = 120;
+            //float ypos = state.ball.y;
+
 
             // --- linha de treino de goleiro --- //
-            xpos = 40;
-            ypos = 150;
+            //xpos = 40;
+            //ypos = 150;
 
-            return Utils::Posture(xpos, ypos, M_PI/4);
+            return Utils::Posture(goleiro.x, goleiro.y, M_PI/4);
         }
 
-        Utils::Posture blueObjective(vss::State state, int index)
+        Utils::Posture blueObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
         {
             float xpos = 45;
             float ypos = state.ball.y;
