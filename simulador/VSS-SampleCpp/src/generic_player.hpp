@@ -8,7 +8,7 @@
 #include "utils.hpp"
 
 #define X_GLRO_AZUL 17
-#define X_GLRO_AMRL 153
+#define X_GLRO_AMRL 151
 
 struct ball_pos{
     float xb = 0;
