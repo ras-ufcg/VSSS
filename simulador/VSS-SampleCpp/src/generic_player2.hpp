@@ -8,14 +8,14 @@
 #include "utils.hpp"
 
 
-
+/*
 struct ball_pos{
     float xb = 0;
     float yb = 0;
     float old_xb = 0;
     float old_yb = 0;
 }bolinha;
-
+*/
 /**
  * @brief Guarda a lógica de funcionamento do jogador de camisa roxa (zagueiro)
  *
@@ -72,7 +72,7 @@ class GenericPlayer2 {
             //xpos = 40;
             //ypos = 150;
 
-            return Utils::Posture(40, 150, M_PI/4);
+            return Utils::Posture(95, 150, M_PI/4);
         }
 
         Utils::Posture blueObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
@@ -243,7 +243,7 @@ class GenericPlayer2 {
                     break;
             }
             */
-            return Utils::Posture(20, 150, M_PI/4);
+            return Utils::Posture(75, 5, M_PI/4);
         }
 
         /**
