@@ -72,7 +72,7 @@ class GenericPlayer2 {
             //xpos = 40;
             //ypos = 150;
 
-            return Utils::Posture(goleiro.x, goleiro.y, M_PI/4);
+            return Utils::Posture(40, 150, M_PI/4);
         }
 
         Utils::Posture blueObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
@@ -87,7 +87,7 @@ class GenericPlayer2 {
              * d1, d2, d3 e d4 limites estratégicos, 4 20 4 8 cm respec.
              * ymax, ymin - limites dá área do goleiro
              */
-
+            /*
             vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[index] : state.teamYellow[index];
 
             // Obtenção de valores para as variáveis
@@ -242,8 +242,8 @@ class GenericPlayer2 {
                     return Utils::Posture(xd, yd, M_PI/4);
                     break;
             }
-
-            return Utils::Posture(xpos, ypos, M_PI/4);
+            */
+            return Utils::Posture(20, 150, M_PI/4);
         }
 
         /**
