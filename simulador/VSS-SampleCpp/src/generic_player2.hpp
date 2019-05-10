@@ -87,7 +87,7 @@ class GenericPlayer2 {
              * d1, d2, d3 e d4 limites estratégicos, 4 20 4 8 cm respec.
              * ymax, ymin - limites dá área do goleiro
              */
-            /*
+
             vss::Robot robot = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[index] : state.teamYellow[index];
 
             // Obtenção de valores para as variáveis
@@ -99,8 +99,8 @@ class GenericPlayer2 {
             // Obtem o vetor variação de acordo com os últimos dois estados recebidos
             float vxb = calcula_variacao_x(bolinha.xb, bolinha.old_xb);
             float vyb = calcula_variacao_y(bolinha.yb, bolinha.old_yb);
-            // Atualização dos valores antigos  o_0
 
+            // Atualização dos valores antigos  o_0
             bolinha.old_xb = bolinha.xb;
             bolinha.old_yb = bolinha.yb;
 
@@ -116,21 +116,22 @@ class GenericPlayer2 {
             float xa = outro.x;
             float ya = outro.y;
             float xg = goleiro.x;
-            float yg = goleiro.y;
+            //float yg = goleiro.y;
 
             // Definição de constantes
 
 			// Area de transição
+
 			// a constante dxa, marca a area de transição de 20 cm, nas coordenadas
 			// do campo da simulação, esse valor equivale à 40.38
-			int dxa = 20;
+			//int dxa = 20;
             // a constante d1, marca uma linha em y à 40 cm do gol do nosso time
             // nas coordenadas do campo da simulação, esse valor equivale á 50.77
-            // float d1 = 80.77;
+            //float d1 = 80.77;
             //
             // a constante d2 também demarca uma linha só que numa distância de
             // 70 cm do nosso gol. o que na simulação equivale à 88.53
-            // float d2 = 108.53;
+            //float d2 = 108.53;
             //
 			// constantes
 
@@ -138,7 +139,7 @@ class GenericPlayer2 {
 			short int d1 = 4;
 
 			// d2 é 20 cm
-			int d2 = 20;
+			//short int d2 = 20;
 
 			// d3 é 4 cm
 			short int d3 = 4;
@@ -155,7 +156,7 @@ class GenericPlayer2 {
 
             // Calcula a linha de interceção entre a provável trajetória da bola e
             // a linha de ação do defensor
-            float y_inters = yb - ((vyb * (xb - xd))/(vxb));
+            float y_inters = bolinha.yb - ((vyb * (bolinha.xb - xd))/(vxb));
 
             // Máquina de estados
 
@@ -166,37 +167,37 @@ class GenericPlayer2 {
             if(estado == 'a')
             {
                 // Regra 2
-                estado = ((xb + d1) < xd)? 'b' : 'a';
+                estado = ((bolinha.xb + d1) < xd)? 'b' : 'a';
                 // Regra 4 (permuta de posições)
 
-                estado = ((xb - xd) < d3) && (y_min <=(yb + (((yd - yb)*(xb - xg))/(xd - xb)) && (y_max <=(yb + (((yd - yb)*(xb - xg))/(xd - xb))? 'd' : 'a';
+                estado = ((bolinha.xb - xd) < d3) && (y_min <=(bolinha.yb + (((yd - bolinha.yb)*(bolinha.xb - xg))/(xd - bolinha.xb)))) && (y_max <=(bolinha.yb + (((yd - bolinha.yb)*(bolinha.xb - xg))/(xd - bolinha.xb))))? 'd' : 'a';
             }
 
             if(estado == 'b')
             {
                 // Regra 1
-                estado = ((xb - d1) > xd)? 'a' : 'b';
+                estado = ((bolinha.xb - d1) > xd)? 'a' : 'b';
 				// Regra 3
-                estado = ((xa < xb) && (xb < xd))? 'c' : 'b';
+                estado = ((xa < bolinha.xb) && (bolinha.xb < xd))? 'c' : 'b';
             }
 
             if(estado == 'c')
             {
                 // Regra 1
-                estado = ((xb - d1) > xd)? 'a' : 'c';
+                estado = ((bolinha.xb - d1) > xd)? 'a' : 'c';
             }
 
             if(estado == 'd')
             {
 				// Regra 6
-                estado = ((xa - xb) > d4)? 'e' : 'd';
+                estado = ((xa - bolinha.xb) > d4)? 'e' : 'd';
             }
 
             if(estado == 'e'){
 				// Regra 4 (permuta de posições)
-                estado = ((xb - xd) < d3) && (y_min <=(yb + (((yd - yb)*(xb - xg))/(xd - xb)) && (y_max <=(yb + (((yd - yb)*(xb - xg))/(xd - xb))? 'b' : 'e';
+                estado = ((bolinha.xb - xd) < d3) && (y_min <=(bolinha.yb + (((yd - bolinha.yb)*(bolinha.xb - xg))/(xd - bolinha.xb)))) && (y_max <=(bolinha.yb + (((yd - bolinha.yb)*(bolinha.xb - xg))/(xd - bolinha.xb))))? 'b' : 'e';
 				// Regra 5
-                estado = ((xb - xa) < d3) && (y_min <=(yb + (((ya - yb)*(xb - xg))/(xa - xb)) && (y_max <=(yb + (((ya - yb)*(xb - xg))/(xa - xb))? 'd' : 'e';
+                estado = ((bolinha.xb - xa) < d3) && (y_min <=(bolinha.yb + (((ya - bolinha.yb)*(bolinha.xb - xg))/(xa - bolinha.xb)))) && (y_max <=(bolinha.yb + (((ya - bolinha.yb)*(bolinha.xb - xg))/(xa - bolinha.xb))))? 'd' : 'e';
 			}
 
 
@@ -205,7 +206,7 @@ class GenericPlayer2 {
                 case 'a':
                     // FEITO
                     // Impedindo a aproximação da bola
-                    return Utils::Posture(xd, yb, M_PI/4);
+                    return Utils::Posture(xd, bolinha.yb, M_PI/4);
                     break;
 
                 case 'b':
@@ -225,7 +226,7 @@ class GenericPlayer2 {
 
 					// TODO: REVISAR POSICIONAMENTO DO JOGADOR
 
-					if(yd != yb) return Utils::Posture(xd, yb, M_PI/4);
+					if(yd != bolinha.yb) return Utils::Posture(xd, bolinha.yb, M_PI/4);
 					else return Utils::Posture(150, 65, M_PI/4);
 
 
@@ -233,7 +234,7 @@ class GenericPlayer2 {
 
 				case 'e':
 					// Posicionando o robô atrás da bola
-					return Utils::Posture(xb - 4.5 ,yb, M_PI/4);
+					return Utils::Posture(bolinha.xb - 4.5 ,bolinha.yb, M_PI/4);
 					break;
 
 
@@ -242,14 +243,14 @@ class GenericPlayer2 {
                     return Utils::Posture(xd, yd, M_PI/4);
                     break;
             }
-            */
+
             return Utils::Posture(75, 5, M_PI/4);
         }
 
         /**
          * @brief Calcula valores unitários representando a direção de deslocamento da bola em x.
-         *olinha.xb = state.ball.x;
-            bolinha.yb = state.ball.y;
+         * @param bolinha.xb = state.ball.x;
+           @param bolinha.yb = state.ball.y;
 
             // Obtem o vetor variação de acordo com os últimos dois estados recebidos
             float vxb = calcula_variacao_x(bolinha.xb, bolinha.old_xb);
