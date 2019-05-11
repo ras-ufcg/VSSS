@@ -139,7 +139,7 @@ class GenericPlayer2 {
 			short int d1 = 4;
 
 			// d2 é 20 cm
-			//short int d2 = 20;
+			short int d2 = 20;
 
 			// d3 é 4 cm
 			short int d3 = 4;
@@ -178,7 +178,7 @@ class GenericPlayer2 {
                 // Regra 1
                 estado = ((bolinha.xb - d1) > xd)? 'a' : 'b';
 				// Regra 3
-                estado = ((xa < bolinha.xb) && (bolinha.xb < xd))? 'c' : 'b';
+                estado = ((xa < bolinha.xb) && (bolinha.xb < xd) && ((ya - bolinha.yb) < d2) && ((yd - bolinha.yb) < d2))? 'c' : 'b';
             }
 
             if(estado == 'c')
