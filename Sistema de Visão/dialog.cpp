@@ -17,7 +17,7 @@ Dialog::Dialog(QWidget *parent) :
     arduino_port_name = "";
     arduino = new QSerialPort;
 
-   /* qDebug() << "Number of available ports: " << QSerialPortInfo::availablePorts().length();
+    qDebug() << "Number of available ports: " << QSerialPortInfo::availablePorts().length();
         foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
             qDebug() << "Has vendor ID: " << serialPortInfo.hasVendorIdentifier();
             if(serialPortInfo.hasVendorIdentifier()){
@@ -27,7 +27,7 @@ Dialog::Dialog(QWidget *parent) :
             if(serialPortInfo.hasProductIdentifier()){
                 qDebug() << "Product ID: " << serialPortInfo.productIdentifier();
             }
-        }*/
+        }
 
     foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()){
            if(serialPortInfo.hasVendorIdentifier() && serialPortInfo.hasProductIdentifier()){

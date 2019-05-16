@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //set height and width of capture frame
     capture.set(CV_CAP_PROP_FRAME_WIDTH, WIDTH);
     capture.set(CV_CAP_PROP_FRAME_HEIGHT, HEIGHT);
+    //capture.set(CV_CAP_PROP_AUTOFOCUS, 0);
 
     namedWindow(imageWindow);
     namedWindow(hsvWindow);

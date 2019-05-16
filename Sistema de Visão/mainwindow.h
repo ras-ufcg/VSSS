@@ -50,7 +50,7 @@ public:
     static const int MAX_OBJECTS = 20;
 
     //minimum and maximum object area
-    const int MIN_OBJECT_AREA = 25 * 25;
+    const int MIN_OBJECT_AREA = 15 * 15;
     const int MAX_OBJECT_AREA = HEIGHT*WIDTH / 2;
 
     //names that appear at the top of each window
