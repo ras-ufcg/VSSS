@@ -1,4 +1,4 @@
-# Very Small Size Soccer Computational Vision System using Qt
+# VSSS Computational Vision System using OpenCV+Qt
 <b>Real-time multi robot tracking system</b>
 
 In this program robots in a live camera feed are detected and tracked on a Very Small Size Soccer (VSSS) game. As frames are passed through the camera feed, their RGB attributes are converted into the HSV type. This provides better depth so the algorithm can understand all the different colors and their hues in the image. Through that, the min/max HSV attributes are altered until the resulting threshold image has the objects of interests isolateds, the ball and players colors, thereby providing a quick and responsive players tracking mechanism.
