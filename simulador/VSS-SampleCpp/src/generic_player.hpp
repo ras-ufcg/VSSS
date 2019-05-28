@@ -10,13 +10,6 @@
 #define X_GLRO_AZUL 17
 #define X_GLRO_AMRL 151
 
-struct ball_pos{
-    float xb = 0;
-    float yb = 0;
-    float old_xb = 0;
-    float old_yb = 0;
-}bolinha;
-
 /**
  * @brief Guarda a lógica de funcionamento do jogador de camisa vermelha (goleiro)
  *
