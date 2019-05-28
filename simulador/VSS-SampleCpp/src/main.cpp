@@ -29,12 +29,6 @@ State state;
 void send_commands(WheelsCommand, WheelsCommand, WheelsCommand );
 void send_debug();
 
-struct ball_pos{
-    float xb = 0;
-    float yb = 0;
-    float old_xb = 0;
-    float old_yb = 0;
-}bolinha;
 
 int main(int argc, char** argv){
     srand(time(NULL));
