@@ -84,11 +84,6 @@ class GenericPlayer {
             bolinha.old_xb = bolinha.xb;
             bolinha.old_yb = bolinha.yb;
 
-            printf("GOLEIRO AZ \n");
-            printf("Old X: %f \n", bolinha.old_xb);
-            printf("Old Y: %f \n", bolinha.old_yb);
-
-
             // DEBUGG LINES
             printf("Variacao em X: %f \n", vxb);
             printf("Variacao em Y: %f \n", vyb);
@@ -203,10 +198,6 @@ class GenericPlayer {
 
             bolinha.old_xb = bolinha.xb;
             bolinha.old_yb = bolinha.yb;
-
-            printf("GOLEIRO AM \n");
-            printf("Old X: %f \n", bolinha.old_xb);
-            printf("Old Y: %f \n", bolinha.old_yb);
 
             // DEBUGG LINES
             printf("Variacao em X: %f \n", vxb);
