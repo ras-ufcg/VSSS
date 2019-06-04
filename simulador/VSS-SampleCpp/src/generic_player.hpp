@@ -6,6 +6,7 @@
 #include <math.h>
 #include <iostream>
 #include "utils.hpp"
+#include "Calculos.hpp"
 
 #define X_GLRO_AZUL 17
 #define X_GLRO_AMRL 151
@@ -82,6 +83,12 @@ class GenericPlayer {
 
             bolinha.old_xb = bolinha.xb;
             bolinha.old_yb = bolinha.yb;
+
+            printf("GOLEIRO AZ \n");
+            printf("Old X: %f \n", bolinha.old_xb);
+            printf("Old Y: %f \n", bolinha.old_yb);
+
+
             // DEBUGG LINES
             printf("Variacao em X: %f \n", vxb);
             printf("Variacao em Y: %f \n", vyb);
@@ -187,6 +194,8 @@ class GenericPlayer {
             bolinha.xb = state.ball.x;
             bolinha.yb = state.ball.y;
 
+            printf("X: %f \n", bolinha.xb);
+            printf("Y: %f \n", bolinha.yb);
             // Obtem o vetor variação de acordo com os últimos dois estados recebidos
             float vxb = calcula_variacao_x(bolinha.xb, bolinha.old_xb)*(-1);
             float vyb = calcula_variacao_y(bolinha.yb, bolinha.old_yb)*(-1);
@@ -194,6 +203,11 @@ class GenericPlayer {
 
             bolinha.old_xb = bolinha.xb;
             bolinha.old_yb = bolinha.yb;
+
+            printf("GOLEIRO AM \n");
+            printf("Old X: %f \n", bolinha.old_xb);
+            printf("Old Y: %f \n", bolinha.old_yb);
+
             // DEBUGG LINES
             printf("Variacao em X: %f \n", vxb);
             printf("Variacao em Y: %f \n", vyb);
@@ -275,37 +289,6 @@ class GenericPlayer {
                     return Utils::Posture(X_GLRO_AMRL, 65.30, M_PI/4);
                     break;
             }
-        }
-
-        /**
-         * @brief Calcula valores unitários representando a direção de deslocamento da bola em x.
-         *
-         *
-         * @return int
-         */
-        int calcula_variacao_x(float ball_pos, float _ball_pos)
-        {
-            //
-            // volatile float _ball_pos = 0;
-            // DEBUGG LINES
-            printf("Posição atual da bola: %f \n", ball_pos);
-            printf("Posição antiga da bola %f \n", _ball_pos);
-
-            return (( ball_pos - _ball_pos) > 0)? -1 : (( ball_pos - _ball_pos) == 0)? 0 : 1;
-        }
-
-        /**
-         * @brief Calcula valores unitários representando a direção de deslocamento da bola em y.
-         *
-         *
-         * @return int
-         */
-        int calcula_variacao_y(float ball_pos, float _ball_pos)
-        {
-            //
-            // volatile float _ball_pos = 0;
-
-            return (( ball_pos - _ball_pos) > 0)? -1 : (( ball_pos - _ball_pos) == 0)? 0 : 1;
         }
 
         // TODO criar (ou usar um existente) typedef para calcular as duas variações em uma única função

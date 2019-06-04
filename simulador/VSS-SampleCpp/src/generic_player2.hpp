@@ -5,8 +5,8 @@
 #include <Communications/CommandSender.h>
 
 #include "utils.hpp"
-#include "Goleiro_Azul.hpp"
-#include "Goleiro_Amarelo.hpp"
+#include "JOGADOR2_Azul.hpp"
+#include "JOGADOR2_Amarelo.hpp"
 
 /**
  * @brief Guarda a lógica de funcionamento do jogador de camisa roxa (zagueiro)
