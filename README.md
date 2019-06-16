@@ -4,5 +4,5 @@ Time de futebol de robôs na categoria Very Small Soccer Size desenvolvido pelos
 
 ## Conteúdos
 
-* [jogadores](https://github.com/ras-ufcg/VSSS/tree/master/jogadores) - Arquivos refenrentes à montagem, porgramação e documentação dos jogadores
+* [jogadores](https://github.com/ras-ufcg/VSSS/tree/master/jogadores) - Arquivos referentes à montagem, programação e documentação dos jogadores
 * [simulador](https://github.com/ras-ufcg/VSSS/tree/master/simulador) - Ambitente de simulação de estratégias de jogo
