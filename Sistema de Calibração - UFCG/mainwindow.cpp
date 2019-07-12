@@ -24,6 +24,29 @@ MainWindow::MainWindow(QWidget *parent) :
     timer = new QTimer(this);
 
 
+    QPixmap img ("Logopreto.jpg");
+
+
+
+    ui->label->setPixmap(img.scaled(200,400,Qt::KeepAspectRatio));
+
+    brilho = ui->box_brilho->text().toInt();
+    cap.set(CV_CAP_PROP_BRIGHTNESS, brilho);
+
+    contraste = ui->box_contraste->text().toInt();
+    cap.set(CV_CAP_PROP_CONTRAST  , contraste);
+
+    exposicao = ui->box_exposicao->text().toInt();
+    cap.set(CV_CAP_PROP_EXPOSURE  , exposicao);
+
+    saturacao = ui->box_saturacao->text().toInt();
+    cap.set(CV_CAP_PROP_SATURATION, saturacao);
+
+    focus = ui->box_foco->text().toInt();
+    cap.set(CV_CAP_PROP_FOCUS, focus);
+
+    somar = soma(somar);
+
    /* qDebug() << "Brilho: " << brilho;
     qDebug() << "Exposição: " << exposicao;
     qDebug() << "Saturação: " << saturacao;
@@ -34,25 +57,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //cv::imshow("Imagem", image);
 }
 
-void MainWindow::Start(){
-        QPixmap img ("Logopreto.jpg");
+//void MainWindow::Start(){
 
 
-        ui->label->setPixmap(img.scaled(200,400,Qt::KeepAspectRatio));
 
-        brilho = ui->box_brilho->text().toInt();
-        cap.set(CV_CAP_PROP_BRIGHTNESS, brilho);
-
-        contraste = ui->box_contraste->text().toInt();
-
-
-        exposicao = ui->box_exposicao->text().toInt();
-
-
-        saturacao = ui->box_saturacao->text().toInt();
-
-
-        somar = soma(somar);
 
 
 
@@ -66,7 +74,7 @@ void MainWindow::Start(){
           //  break;
         //}
    // }
-}
+//}
 
 int MainWindow::soma(int a) {
     a = brilho + saturacao + contraste + exposicao;
@@ -123,6 +131,7 @@ void MainWindow::on_pushButton_open_webcam_clicked()
 {
     cap.open(0);
 
+
     if(!cap.isOpened())  // Check if we succeeded
     {
         cout << "camera is not open" << endl;
@@ -130,7 +139,7 @@ void MainWindow::on_pushButton_open_webcam_clicked()
     else
     {
         cout << "camera is open" << endl;
-
+        cap.set(CV_CAP_PROP_SETTINGS, 0);
         connect(timer, SIGNAL(timeout()), this, SLOT(update_window()));
         timer->start(20);
     }
@@ -165,7 +174,23 @@ void MainWindow::update_window()
     ui->label_I->resize(ui->label_I->pixmap()->size());
 }
 
+void MainWindow::on_pushButton_save_data_clicked()
+{
+   //COLOCAR AQUI METODOS PARA SALVAR DADOS EM TXT!!!!!
+}
 
+void MainWindow::on_horizontalSlider_F_valueChanged()
+{
+    focus = ui->box_foco->text().toInt();
+    cap.set(CV_CAP_PROP_FOCUS, focus);
+}
 
-
-
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        int x = event->localPos().x();
+        int y = event->localPos().y();
+        cout << x << "," << y << endl;
+    }
+}

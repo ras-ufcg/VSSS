@@ -26,12 +26,14 @@ public:
     int exposicao = 0;
     int saturacao = 0;
     int brilho = 0;
+    int focus = 0;
     int somar = 0;
     bool breakLoop= false;
-    void Start();
+    //void Start();
     int soma(int a);
     explicit MainWindow(QWidget *parent = 0);
     void closeEvent (QCloseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
     ~MainWindow();
 
 private slots:
@@ -42,6 +44,8 @@ private slots:
 
     void on_horizontalSlider_E_valueChanged();
 
+    void on_horizontalSlider_F_valueChanged();
+
     void on_horizontalSlider_S_valueChanged();
 
     void on_pushButton_open_webcam_clicked();
@@ -49,6 +53,9 @@ private slots:
     void on_pushButton_close_webcam_clicked();
 
     void update_window();
+
+    void on_pushButton_save_data_clicked();
+
 
 private:
     Ui::MainWindow *ui;
