@@ -11,6 +11,7 @@
 #define MAINWINDOW_H
 
 #include "dialog.h"
+#include "configuracao.h"
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <sstream>
@@ -47,7 +48,7 @@ public:
     const int HEIGHT = 480;
 
     //max number of objects to be tracked in frame
-    static const int MAX_OBJECTS = 20;
+    static const int MAX_OBJECTS = 2;
 
     //minimum and maximum object area
     const int MIN_OBJECT_AREA = 15 * 15;
@@ -87,8 +88,9 @@ public:
     // To store objects with defined values.
     std::vector<item> objects;
 
-    // To access the elements of Dialog
+    // To access the elements of Dialog and configuracao
     Dialog *d;
+    configuracao *c;
 
     //bools pra testar os leds
     bool flag = false;

@@ -22,13 +22,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Default object of lime color for test purposes, uncomment when needed.
     //objects.push_back(setUpObject("lime", 32,72, 105, 205, 18, 167));
-
+    int Brilho = 30;
+    int Exposure = -10;
+    int Saturacao = 120;
+    int Contraste = 200;
     //open capture object at location zero (default location for webcam)
     capture.open(0);
     //set height and width of capture frame
+    capture.set(CV_CAP_PROP_CONTRAST  , Contraste);
+    capture.set(CV_CAP_PROP_SATURATION, Saturacao);
+    capture.set(CV_CAP_PROP_EXPOSURE  , Exposure);
+    capture.set(CV_CAP_PROP_BRIGHTNESS, Brilho);
     capture.set(CV_CAP_PROP_FRAME_WIDTH, WIDTH);
     capture.set(CV_CAP_PROP_FRAME_HEIGHT, HEIGHT);
-    //capture.set(CV_CAP_PROP_AUTOFOCUS, 0);
+    capture.set(CV_CAP_PROP_AUTOFOCUS, 0);
 
     namedWindow(imageWindow);
     namedWindow(hsvWindow);
@@ -42,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //novo objeto de Dialog
     d = new Dialog();
+    c = new configuracao();
 
 
 
@@ -61,6 +69,7 @@ MainWindow::~MainWindow()
 
     delete ui;
     delete d;
+    delete c;
 }
 // calcula(MainWindow w
 
@@ -186,6 +195,7 @@ void MainWindow::trackObject(int &x, int &y, item tempItem, Mat &cameraFeed){
 
                 Moments moment = moments(contours[index]);
                 area = moment.m00;
+                qDebug() << "Area: " << area;
                 sideLength= sqrt(area);
 
                 //if the area is less than 25 px by 25px then it is probably just noise
