@@ -293,7 +293,7 @@
      <rect>
       <x>10</x>
       <y>520</y>
-      <width>121</width>
+      <width>111</width>
       <height>31</height>
      </rect>
     </property>
@@ -304,7 +304,7 @@
    <widget class="QPushButton" name="pushButton_close_webcam">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>130</x>
       <y>520</y>
       <width>121</width>
       <height>31</height>
@@ -330,7 +330,7 @@
    <widget class="QPushButton" name="pushButton_save_data">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>260</x>
       <y>520</y>
       <width>121</width>
       <height>31</height>
@@ -392,6 +392,19 @@
     </property>
     <property name="text">
      <string>FOCUS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_carregar">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>520</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Carregar</string>
     </property>
    </widget>
   </widget>
