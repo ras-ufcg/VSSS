@@ -1,5 +1,5 @@
-#ifndef JOGADOR2_AZUL_H
-#define JOGADOR2_AZUL_H
+#ifndef JOGADOR1_AZUL_H
+#define JOGADOR1_AZUL_H
 
 #include <Communications/StateReceiver.h>
 #include <Communications/CommandSender.h>
@@ -8,7 +8,7 @@
 #include "Calculos.hpp"
 
 
-Utils::Posture blueObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
+Utils::Posture blueObjective1(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
 {
 	// Variáveis
 	/*
@@ -192,4 +192,4 @@ Utils::Posture blueObjective(vss::State state, int index, vss::Robot goleiro, vs
 
 	return Utils::Posture(75, 5, M_PI / 4);
 }
-#endif // JOGADOR2_AZUL_H
+#endif // JOGADOR1_AZUL_H

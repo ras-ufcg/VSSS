@@ -8,7 +8,7 @@
 #include "Calculos.hpp"
 
 
-Utils::Posture yellowObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
+Utils::Posture yellowObjective2(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
 {
 	printf("< Jogador 2 Amarelo >\n");
 	return Utils::Posture(10, 10, M_PI / 4);

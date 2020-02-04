@@ -8,7 +8,7 @@
 #include "Calculos.hpp"
 
 
-Utils::Posture blueObjective(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
+Utils::Posture blueObjective2(vss::State state, int index, vss::Robot goleiro, vss::Robot outro)
 {
 	// Variáveis
 	/*
