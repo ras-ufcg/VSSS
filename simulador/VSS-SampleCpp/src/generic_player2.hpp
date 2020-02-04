@@ -38,9 +38,9 @@ public:
 	 * @brief Define a postura final que se deseja chegar na iteração atual
 	 *
 	 * @param index Indice do robo que se deseja atualizar
+	 * @param state Estado atual do jogador
 	 * @return Posture Posiçãoque se deseja adquirir
 	 */
-	
 	Utils::Posture defineObjective(vss::State state, int index)
 	{
 
@@ -48,8 +48,8 @@ public:
 
 		vss::Robot goleiro = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[0] : state.teamYellow[0];
 
-		return (this->_teamType == vss::TeamType::Blue) ? blueObjective1(state, index, goleiro, outro) :
-			   yellowObjective1(state, index, goleiro, outro);
+		return (this->_teamType == vss::TeamType::Blue) ? blueObjective2(state, index, goleiro, outro) :
+			   yellowObjective2(state, index, goleiro, outro);
 
 	}
 

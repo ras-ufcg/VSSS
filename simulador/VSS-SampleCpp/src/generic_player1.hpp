@@ -40,7 +40,6 @@ public:
 	 * @param index Indice do robo que se deseja atualizar
 	 * @return Posture Posiçãoque se deseja adquirir
 	 */
-	
 	Utils::Posture defineObjective(vss::State state, int index)
 	{
 
@@ -48,8 +47,8 @@ public:
 
 		vss::Robot goleiro = (this->_teamType == vss::TeamType::Blue) ? state.teamBlue[0] : state.teamYellow[0];
 
-		return (this->_teamType == vss::TeamType::Blue) ? blueObjective(state, index, goleiro, outro) :
-			   yellowObjective(state, index, goleiro, outro);
+		return (this->_teamType == vss::TeamType::Blue) ? blueObjective1(state, index, goleiro, outro) :
+			   yellowObjective1(state, index, goleiro, outro);
 	}
 
 
