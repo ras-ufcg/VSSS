@@ -2,14 +2,21 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-
-//#include <opencv2/core/core.hpp>
+#include <Qdebug>
+#include <iostream>
+#include <QPixmap>
+#include <QtWidgets>
+#include <QTimer>
+#include <string>
+#include <QFileDialog>
+#include "opencv2/core/core.hpp"
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
+#include "opencv2/opencv.hpp"
+#include "opencv2/core/types.hpp"
 
 
-
+using namespace cv;
 using namespace std;
 
 
@@ -22,6 +29,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    string filename;
+    FileStorage fs;
+    ofstream outSaveData;
     int contraste = 0;
     int exposicao = 0;
     int saturacao = 0;
@@ -29,6 +39,8 @@ public:
     int focus = 0;
     int somar = 0;
     bool breakLoop= false;
+    void GetAndSetSaveConfigurations();
+    void setfilename(QString);
     //void Start();
     int soma(int a);
     explicit MainWindow(QWidget *parent = 0);
@@ -56,6 +68,7 @@ private slots:
 
     void on_pushButton_save_data_clicked();
 
+    void on_pushButton_carregar_clicked();
 
 private:
     Ui::MainWindow *ui;

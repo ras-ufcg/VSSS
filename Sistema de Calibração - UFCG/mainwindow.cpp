@@ -1,15 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <Qdebug>
-#include <iostream>
-#include <QPixmap>
-#include <QtWidgets>
-#include <QTimer>
-
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-
 using namespace std;
 using namespace cv;
 
@@ -18,15 +9,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
 
+    FileStorage fs;
+    filename = "save.xml";
     ui->setupUi(this);
-
+    fs.open(filename, FileStorage::READ);
 
     timer = new QTimer(this);
 
-
     QPixmap img ("Logopreto.jpg");
-
-
 
     ui->label->setPixmap(img.scaled(200,400,Qt::KeepAspectRatio));
 
@@ -94,7 +84,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_horizontalSlider_B_valueChanged()
+void MainWindow::on_horizontalSlider_B_valueChanged( )
 {
     brilho = ui->box_brilho->text().toInt();
     cap.set(CV_CAP_PROP_BRIGHTNESS, brilho);
@@ -102,29 +92,25 @@ void MainWindow::on_horizontalSlider_B_valueChanged()
 
 }
 
-void MainWindow::on_horizontalSlider_C_valueChanged()
+void MainWindow::on_horizontalSlider_C_valueChanged( )
 {
     contraste = ui->box_contraste->text().toInt();
     cap.set(CV_CAP_PROP_CONTRAST  , contraste);
     somar = soma(somar);
-
 }
 
-void MainWindow::on_horizontalSlider_E_valueChanged()
+void MainWindow::on_horizontalSlider_E_valueChanged( )
 {
-
     exposicao = ui->box_exposicao->text().toInt();
     cap.set(CV_CAP_PROP_EXPOSURE  , exposicao);
     somar = soma(somar);
-
 }
 
-void MainWindow::on_horizontalSlider_S_valueChanged()
+void MainWindow::on_horizontalSlider_S_valueChanged( )
 {
-    saturacao = ui->box_saturacao->text().toInt();
-    cap.set(CV_CAP_PROP_SATURATION, saturacao);
-    somar = soma(somar);
-
+     saturacao = ui->box_saturacao->text().toInt();
+     cap.set(CV_CAP_PROP_SATURATION, saturacao);
+     somar = soma(somar);
 }
 
 void MainWindow::on_pushButton_open_webcam_clicked()
@@ -176,10 +162,21 @@ void MainWindow::update_window()
 
 void MainWindow::on_pushButton_save_data_clicked()
 {
-   //COLOCAR AQUI METODOS PARA SALVAR DADOS EM TXT!!!!!
+           FileStorage fs (filename, FileStorage :: WRITE);
+           fs.open (filename, FileStorage::WRITE);
+           fs << "Dados";
+           fs << "{";
+           fs << "Brightness"<< brilho;
+           fs << "Exposure"<< exposicao;
+           fs << "Saturation"<< saturacao;
+           fs << "Contrast"<< contraste;
+           fs << "Focus"<< focus;
+           fs << "}";
+           fs.release();
+
 }
 
-void MainWindow::on_horizontalSlider_F_valueChanged()
+void MainWindow::on_horizontalSlider_F_valueChanged( )
 {
     focus = ui->box_foco->text().toInt();
     cap.set(CV_CAP_PROP_FOCUS, focus);
@@ -193,4 +190,77 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         int y = event->localPos().y();
         cout << x << "," << y << endl;
     }
+}
+
+void MainWindow::GetAndSetSaveConfigurations( )
+{
+    if(fs.isOpened())
+    {
+        FileNode data = fs["Dados"];
+        cap.set(CV_CAP_PROP_EXPOSURE  , (int)(data["Exposure"]));
+        cap.set(CV_CAP_PROP_BRIGHTNESS, (int)(data["Brightness"])+1);
+        Sleep(30);
+        cap.set(CV_CAP_PROP_BRIGHTNESS, (int)(data["Brightness"])  );
+        Sleep(30);
+        cap.set(CV_CAP_PROP_CONTRAST  , (int)(data["Contrast"])    );
+        cap.set(CV_CAP_PROP_SATURATION, (int)(data["Saturation"])  );
+        cap.set(CV_CAP_PROP_EXPOSURE  , (int)(data["Exposure"])    );
+        cap.set(CV_CAP_PROP_BRIGHTNESS, (int)(data["Brightness"])+1);
+        Sleep(30);
+        cap.set(CV_CAP_PROP_BRIGHTNESS, (int)(data["Brightness"])  );
+        Sleep(30);
+
+        //FALTA O FOCO
+
+        brilho = (int)(data["Brightness"]);
+        exposicao = (int)(data["Exposure"]);
+        saturacao = (int)(data["Saturation"]);
+        contraste = (int)(data["Contrast"]);
+        focus = (int)(data["Focus"]);
+
+        ui->horizontalSlider_B->sliderMoved(data["Brightness"]);
+        ui->box_brilho->valueChanged(data["Brightness"]);
+
+        ui->horizontalSlider_S->sliderMoved(data["Saturation"]);
+        ui->box_saturacao->valueChanged(data["Saturation"]);
+
+        ui->horizontalSlider_C->sliderMoved(data["Contrast"]);
+        ui->box_contraste->valueChanged(data["Contrast"]);
+
+        ui->horizontalSlider_E->sliderMoved(data["Exposure"]);
+        ui->box_exposicao->valueChanged(data["Exposure"]);
+
+        ui->horizontalSlider_F->sliderMoved(data["Focus"]);
+        ui->box_foco->valueChanged(data["Focus"]);
+
+    }
+    else
+    {
+        cap.set(CV_CAP_PROP_CONTRAST  , contraste);
+        cap.set(CV_CAP_PROP_SATURATION, saturacao);
+        cap.set(CV_CAP_PROP_EXPOSURE  , exposicao);
+        cap.set(CV_CAP_PROP_BRIGHTNESS, brilho+1);
+        Sleep(30);
+        cap.set(CV_CAP_PROP_BRIGHTNESS, brilho);
+        Sleep(30);
+        //FALTA FOCO;
+   }
+}
+
+void MainWindow::on_pushButton_carregar_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Abrir arquivo"),"C:", tr("XML (*.xml)"));
+    if(!fileName.isNull())
+    {
+        setfilename(fileName);
+        filename = fileName.toStdString();
+    }
+}
+
+void MainWindow::setfilename(QString name)
+{
+    filename = name.toStdString();
+    fs.release();
+    fs.open(filename, FileStorage::READ);
+    GetAndSetSaveConfigurations();
 }
